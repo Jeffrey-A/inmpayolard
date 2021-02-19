@@ -5,12 +5,27 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
 
 import HomeScreen from "./components/HomeScreen";
 import PropertyViewScreen from "./components/PropertyViewScreen";
 import SavedPropertiesScreen from "./components/SavedPropertiesScreen";
 
 import properties from './testData';
+
+
+const HomeTopTab = createMaterialTopTabNavigator();
+
+function HomeTopTabNavigator() {
+  return (
+    <HomeTopTab.Navigator>
+      <HomeTopTab.Screen name="On Sale" component={(props) => <HomeScreen properties={properties} {...props} />} />
+      <HomeTopTab.Screen name="Renting" component={(props) => <HomeScreen properties={properties} {...props} />} />
+    </HomeTopTab.Navigator>
+  );
+}
+
 
 const HomeStack = createStackNavigator();
 
@@ -19,7 +34,7 @@ function HomeStackNavigator() {
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="Home"
-        component={(props) => <HomeScreen properties={properties} {...props} />}
+        component={HomeTopTabNavigator}
       />
       <HomeStack.Screen
         name="Property View"
