@@ -18,7 +18,7 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <StatusBar style="auto" />
         <ScrollView>
-          {properties.map((property) => {
+          {properties && properties.map((property) => {
             const { id, title, thumbnail_image } = property;
 
             return (
@@ -30,8 +30,7 @@ export default class HomeScreen extends React.Component {
                 <Image
                   style={styles.image}
                   source={{
-                    uri:
-                      "https://inmobiliaria56.com/wp-content/uploads/2021/01/IMG_4660-700x450.jpg",
+                    uri: thumbnail_image,
                   }}
                 />
               </TouchableOpacity>

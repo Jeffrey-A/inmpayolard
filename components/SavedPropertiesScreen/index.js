@@ -2,14 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-export default function PropertyViewScreen(props) {
-  const {title, images, description} = props.route.params;
+export default function SavedPropertiesScreen(props) {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{uri: images[0]}} />
-      <Text>{description}</Text>
-      <StatusBar style="auto" />
+      <Text>Saved Properties</Text>
     </View>
   );
 }
