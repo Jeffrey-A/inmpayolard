@@ -11,6 +11,8 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import HomeScreen from "./components/HomeScreen";
 import PropertyViewScreen from "./components/PropertyViewScreen";
 import SavedPropertiesScreen from "./components/SavedPropertiesScreen";
+import SettingsScreen from "./components/SettingsScreen";
+// import CarouselScreen from './components/Carousel';
 
 import properties from './testData';
 

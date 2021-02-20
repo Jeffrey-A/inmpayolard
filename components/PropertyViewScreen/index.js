@@ -2,12 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
+import Carousel from '../Carousel';
+
 export default function PropertyViewScreen(props) {
   const {title, images, description} = props.route.params;
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{uri: images[0]}} />
+      <Carousel images={images} />
       <Text>{description}</Text>
       <StatusBar style="auto" />
     </View>
