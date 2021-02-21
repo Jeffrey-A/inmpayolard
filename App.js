@@ -1,6 +1,8 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import * as Font from "expo-font";
+import AppLoading from 'expo-app-loading'
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -51,53 +53,74 @@ function HomeStackNavigator() {
 
 const BottomTab = createBottomTabNavigator();
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <BottomTab.Navigator style={styles.bottomNavigator}>
-        <BottomTab.Screen
-          name="Home"
-          options={{
-            tabBarLabel: "Explorar",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="search" size={size} color={color} />
-            ),
-          }}
-          component={HomeStackNavigator}
-        />
-        <BottomTab.Screen
-          name="Saved"
-          options={{
-            tabBarLabel: "Favoritos",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="heart" size={size} color={color} />
-            ),
-          }}
-          component={SavedPropertiesScreen}
-        />
-        <BottomTab.Screen
-          name="post"
-          options={{
-            tabBarLabel: "Publicar",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="add-circle" size={size} color={color} />
-            ),
-          }}
-          component={PostScreen}
-        />
-        <BottomTab.Screen
-          name="settings"
-          options={{
-            tabBarLabel: "Ajustes",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="settings" size={size} color={color} />
-            ),
-          }}
-          component={SettingsScreen}
-        />
-      </BottomTab.Navigator>
-    </NavigationContainer>
-  );
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+    };
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      ...Ionicons.font,
+    });
+    this.setState({ isReady: true });
+  }
+  render() {
+    if (!this.state.isReady) {
+      return <AppLoading />;
+    }
+
+    return (
+      <NavigationContainer>
+        <BottomTab.Navigator style={styles.bottomNavigator}>
+          <BottomTab.Screen
+            name="Home"
+            options={{
+              tabBarLabel: "Explorar",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="search" size={size} color={color} />
+              ),
+            }}
+            component={HomeStackNavigator}
+          />
+          <BottomTab.Screen
+            name="Saved"
+            options={{
+              tabBarLabel: "Favoritos",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="heart" size={size} color={color} />
+              ),
+            }}
+            component={SavedPropertiesScreen}
+          />
+          <BottomTab.Screen
+            name="post"
+            options={{
+              tabBarLabel: "Publicar",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="add-circle" size={size} color={color} />
+              ),
+            }}
+            component={PostScreen}
+          />
+          <BottomTab.Screen
+            name="settings"
+            options={{
+              tabBarLabel: "Ajustes",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="settings" size={size} color={color} />
+              ),
+            }}
+            component={SettingsScreen}
+          />
+        </BottomTab.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

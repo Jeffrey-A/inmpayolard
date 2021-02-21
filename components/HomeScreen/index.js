@@ -10,6 +10,8 @@ import {
   ScrollView,
 } from "react-native";
 
+import Search from "../Search";
+
 export default class HomeScreen extends React.Component {
   render() {
     const { properties, navigation } = this.props;
@@ -17,25 +19,30 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <StatusBar style="auto" />
+        <View>
+          <Search />
+        </View>
+       
         <ScrollView>
-          {properties && properties.map((property) => {
-            const { id, title, thumbnail_image } = property;
+          {properties &&
+            properties.map((property) => {
+              const { id, title, thumbnail_image } = property;
 
-            return (
-              <TouchableOpacity
-                key={id}
-                onPress={() => navigation.navigate("Property View", property)}
-              >
-                <Text>{title}</Text>
-                <Image
-                  style={styles.image}
-                  source={{
-                    uri: thumbnail_image,
-                  }}
-                />
-              </TouchableOpacity>
-            );
-          })}
+              return (
+                <TouchableOpacity
+                  key={id}
+                  onPress={() => navigation.navigate("Property View", property)}
+                >
+                  <Text>{title}</Text>
+                  <Image
+                    style={styles.image}
+                    source={{
+                      uri: thumbnail_image,
+                    }}
+                  />
+                </TouchableOpacity>
+              );
+            })}
         </ScrollView>
       </View>
     );
