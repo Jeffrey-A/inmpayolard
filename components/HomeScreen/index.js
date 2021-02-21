@@ -11,6 +11,7 @@ import {
 } from "react-native";
 
 import Search from "../Search";
+import PropertyCard from "../PropertyCard";
 
 export default class HomeScreen extends React.Component {
   render() {
@@ -22,8 +23,8 @@ export default class HomeScreen extends React.Component {
         <View>
           <Search />
         </View>
-       
-        <ScrollView>
+
+        <ScrollView style={ { flex: 1, width: '90%'}}>
           {properties &&
             properties.map((property) => {
               const { id, title, thumbnail_image } = property;
@@ -33,13 +34,7 @@ export default class HomeScreen extends React.Component {
                   key={id}
                   onPress={() => navigation.navigate("Property View", property)}
                 >
-                  <Text>{title}</Text>
-                  <Image
-                    style={styles.image}
-                    source={{
-                      uri: thumbnail_image,
-                    }}
-                  />
+                  <PropertyCard title={title} image={thumbnail_image} />
                 </TouchableOpacity>
               );
             })}
