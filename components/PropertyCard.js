@@ -63,11 +63,11 @@ export default function PropertyCard(props) {
               <MaterialCommunityIcons size={20}  color="#87838B" name="ruler-square-compass" />
             </Button>
           </Left>
-          {/* <Left>
+           <Left>
             <Button transparent textStyle={{ color: "#87838B" }}>
-              <MaterialCommunityIcons size={20}  color="#87838B" name="arrow-expand-all" />
+              <MaterialCommunityIcons size={20}  color="#87838B" name="heart-outline" />
             </Button>
-          </Left> */}
+          </Left>
         </CardItem>
       </Card>
     </Content>
