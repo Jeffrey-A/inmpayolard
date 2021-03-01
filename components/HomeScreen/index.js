@@ -1,5 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import {connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {
   StyleSheet,
   Text,
@@ -13,10 +15,14 @@ import {
 import Search from "../Search";
 import PropertyCard from "../PropertyCard";
 
-export default class HomeScreen extends React.Component {
+import {addPropertyToFavList} from '../../redux/action';
+
+
+
+class HomeScreen extends React.Component {
   render() {
     const { properties, navigation } = this.props;
-
+    
     return (
       <View style={styles.container}>
         <StatusBar style="auto" />
@@ -25,16 +31,15 @@ export default class HomeScreen extends React.Component {
         </View>
 
         <ScrollView style={ { flex: 1, width: '90%'}}>
-          {properties &&
-            properties.map((property) => {
-              const { id, title, thumbnail_image } = property;
+          {properties && properties.map((property) => {
+              const { id } = property;
 
               return (
                 <TouchableOpacity
                   key={id}
                   onPress={() => navigation.navigate("Property View", property)}
                 >
-                  <PropertyCard title={title} image={thumbnail_image} />
+                  <PropertyCard property={property} saveProperty={this.props.addPropertyToFavList} />
                 </TouchableOpacity>
               );
             })}
@@ -56,3 +61,14 @@ const styles = StyleSheet.create({
     height: 100,
   },
 });
+
+const mapStateToProps = state => ({
+  properties: state.propertyReducer.properties,
+});
+
+
+const matchDispatchToProps = dispatch => (bindActionCreators({addPropertyToFavList: addPropertyToFavList},dispatch));
+
+
+
+export default connect(mapStateToProps, {addPropertyToFavList: addPropertyToFavList})(HomeScreen);
