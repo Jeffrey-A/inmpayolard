@@ -18,7 +18,7 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function PropertyCard(props) {
   const {saveProperty, property} = props;
-  const { title, thumbnail_image: image, } = property;
+  const { title, thumbnail_image: image, isSaved } = property;
 
   return (
     <Content>
@@ -65,7 +65,7 @@ export default function PropertyCard(props) {
           </Left>
            <Left>
              <Button onPress={() => saveProperty(property)} transparent textStyle={{ color: "#87838B" }}>
-              <MaterialCommunityIcons size={20}  color="#87838B" name="heart-outline" />
+               <MaterialCommunityIcons size={20}  color="#87838B" name={isSaved ? "heart" : "heart-outline"} />
             </Button>
           </Left>
         </CardItem>

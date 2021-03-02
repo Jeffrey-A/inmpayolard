@@ -16,7 +16,6 @@ export const REMOVE_PROPERT_FROM_FAV_LIST = 'REMOVE_PROPERT_FROM_FAV_LIST';
 // ACTION CREATORS
 
 export const addPropertyToFavList = newProperty => {
-  console.log("Action")
   return({
     type: ADD_PROPERTY_TO_FAV_LIST,
     payload: newProperty,
@@ -24,5 +23,10 @@ export const addPropertyToFavList = newProperty => {
 };
 
 
-
+export const removePropertyFromFavList = property => {
+  return ({
+    type: REMOVE_PROPERT_FROM_FAV_LIST,
+    payload: property,
+  });
+};
 

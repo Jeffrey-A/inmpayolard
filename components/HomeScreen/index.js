@@ -15,7 +15,7 @@ import {
 import Search from "../Search";
 import PropertyCard from "../PropertyCard";
 
-import {addPropertyToFavList} from '../../redux/action';
+import {addPropertyToFavList, removePropertyFromFavList} from '../../redux/action';
 
 
 
@@ -32,14 +32,14 @@ class HomeScreen extends React.Component {
 
         <ScrollView style={ { flex: 1, width: '90%'}}>
           {properties && properties.map((property) => {
-              const { id } = property;
+            const { id, isSaved } = property;
 
               return (
                 <TouchableOpacity
                   key={id}
                   onPress={() => navigation.navigate("Property View", property)}
                 >
-                  <PropertyCard property={property} saveProperty={this.props.addPropertyToFavList} />
+                  <PropertyCard property={property} saveProperty={isSaved ? this.props.removePropertyFromFavList : this.props.addPropertyToFavList} />
                 </TouchableOpacity>
               );
             })}
@@ -67,8 +67,15 @@ const mapStateToProps = state => ({
 });
 
 
-const matchDispatchToProps = dispatch => (bindActionCreators({addPropertyToFavList: addPropertyToFavList},dispatch));
+const matchDispatchToProps = dispatch => (bindActionCreators({
+  addPropertyToFavList: addPropertyToFavList, 
+  removePropertyFromFavList: removePropertyFromFavList},dispatch
+));
 
 
 
-export default connect(mapStateToProps, {addPropertyToFavList: addPropertyToFavList})(HomeScreen);
+export default connect(mapStateToProps, 
+  { 
+    addPropertyToFavList: addPropertyToFavList,
+    removePropertyFromFavList: removePropertyFromFavList,
+  })(HomeScreen);
